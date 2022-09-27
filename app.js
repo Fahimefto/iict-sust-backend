@@ -1,14 +1,18 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
+const eventRoutes = require("./events/evRoutes");
 
+const app = express();
 app.use(express.json());
 
-//routes
+//routes || API
+
 app.get("/", (req, res) => {
   res.json({ message: "Server Running " });
 });
+//event API
+app.use("/api/events", eventRoutes);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {
