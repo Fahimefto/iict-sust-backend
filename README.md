@@ -18,6 +18,12 @@ Say what the step will be
 yarn
 ```
 
-## Usage <a name = "usage"></a>
+## API's <a name = "api"></a>
 
-Sit consequat enim ut cillum nostrud proident ipsum esse excepteur amet elit reprehenderit. Adipisicing esse sit eu reprehenderit ad sit excepteur id aute. Ullamco occaecat amet exercitation elit in incididunt mollit. Nostrud occaecat dolore aliqua tempor veniam id cillum nulla est velit sit quis in ex. Voluptate cillum aute ipsum consequat ea nisi commodo esse Lorem laborum minim laboris enim eu. Pariatur consequat in ullamco nisi irure. Ullamco reprehenderit sint laborum veniam proident dolor ullamco qui anim veniam aliquip ex.
+### evnets
+
+Get all events
+
+```
+localhost/api/events
+```
