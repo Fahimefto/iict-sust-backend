@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const eventRoutes = require("./events/evRoutes");
 const staffRoutes = require("./stuffs/sRoutes") ;
+const noticesRoutes = require("./notices/noticesRoutes") ;
 
 const app = express();
 app.use(express.json());
@@ -12,9 +13,10 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ message: "Server Running " });
 });
-//event API
+//APIs
 app.use("/api/events", eventRoutes);
 app.use("/api/staffs" , staffRoutes);
+app.use("/api/notices" , noticesRoutes);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {

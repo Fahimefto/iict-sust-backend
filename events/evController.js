@@ -13,6 +13,7 @@ const getAllEvents = async (req, res) => {
 //get event by id
 const getEventbyId = async (req, res) => {
   const { id } = req.params;
+  console.log("==========================")
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ message: "No event with that id" });
   try {
