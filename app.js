@@ -6,7 +6,7 @@ app.use(express.json());
 
 //path
 app.get("/", (req, res) => {
-  res.json({ message: "Server Running" });
+  res.json({ message: "Server Running " });
 });
 
 app.listen(process.env.PORT, () =>
