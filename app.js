@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const eventRoutes = require("./events/evRoutes");
+const staffRoutes = require("./stuffs/sRoutes") ;
 
 const app = express();
 app.use(express.json());
@@ -13,13 +14,14 @@ app.get("/", (req, res) => {
 });
 //event API
 app.use("/api/events", eventRoutes);
+app.use("/api/staffs" , staffRoutes);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {
   console.log("listening at " + process.env.PORT);
   try {
     //database connection url
-    const con = await mongoose.connect(process.env.MONGO_URI_LOCAL, {
+    const con = await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
