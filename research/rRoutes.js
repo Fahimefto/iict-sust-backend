@@ -4,7 +4,7 @@ const router = Router();
 //research controller
 const researchController = require("./rController");
 
-//API routes of events
+//API routes of research
 router.get("/", researchController.getAllResearchs);
 router.get("/:id", researchController.getResearchbyId);
 router.post("/", researchController.postResearch);
