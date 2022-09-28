@@ -1,66 +1,62 @@
+const Researchs = require("../models/research");
 const mongoose = require("mongoose");
-const Events = require("../models/events");
 
-//get all events
-const getAllEvents = async (req, res) => {
+//get all researchs
+const getAllResearchs = async (req, res) => {
   try {
-    const events = await Events.find({});
-    res.json(events);
+    const research = await Researchs.find({});
+    res.json(research);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-//get event by id
-const getEventbyId = async (req, res) => {
+//get Research by id
+const getResearchbyId = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ message: "No event with that id" });
   try {
-    const event = await Events.findById({ _id: id });
-    if (!event)
+    const research = await Researchs.findById({ _id: id });
+    if (!research)
       return res.status(404).json({ message: "No event with that id" });
-    res.json(event);
+    res.json(research);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-//post event
-const postEvent = async (req, res) => {
-  const { title, description, date, location, image } = req.body;
+//post Research
+const postResearch = async (req, res) => {
+  const { area, title, description } = req.body;
   try {
-    const event = await Events.create({
+    const research = await Researchs.create({
+      area,
       title,
       description,
-      date,
-      location,
-      image,
     });
-    res.json(event);
+    res.status(200).json({ message: "event created successfully", research });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-//update event by id
-const updateEventbyId = async (req, res) => {
+//update Research by id
+const updateResearchbyId = async (req, res) => {
   const { id } = req.params;
-  const { title, description, date, location, image } = req.body;
+  const { area, title, description } = req.body;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ message: "No event with that id" });
   try {
-    const event = await Events.findByIdAndUpdate(
+    const research = await Researchs.findByIdAndUpdate(
       { _id: id },
       {
+        area,
         title,
         description,
-        date,
-        location,
-        image,
       }
     );
-    if (!event)
+    if (!research)
       return res.status(404).json({ message: "No event with that id" });
     res.json({ message: "event updated successfully" });
   } catch (error) {
@@ -68,14 +64,14 @@ const updateEventbyId = async (req, res) => {
   }
 };
 
-//delete event by id
-const deleteEventbyId = async (req, res) => {
+//delete Research by id
+const deleteResearchbyId = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ message: "No event with that id" });
   try {
-    const event = await Events.findByIdAndDelete({ _id: id });
-    if (!event)
+    const research = await Researchs.findByIdAndDelete({ _id: id });
+    if (!research)
       return res.status(404).json({ message: "No event with that id" });
     res.json({ message: "event deleted successfully" });
   } catch (error) {
@@ -84,9 +80,9 @@ const deleteEventbyId = async (req, res) => {
 };
 
 module.exports = {
-  getAllEvents,
-  postEvent,
-  updateEventbyId,
-  deleteEventbyId,
-  getEventbyId,
+  getAllResearchs,
+  postResearch,
+  updateResearchbyId,
+  deleteResearchbyId,
+  getResearchbyId,
 };
