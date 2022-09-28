@@ -7,6 +7,7 @@ const staffRoutes = require("./stuffs/sRoutes");
 const batchRoutes = require("./batch/bRoutes");
 const upEventRoutes = require("./upcommingEvents/upRoutes");
 const researchRoutes = require("./research/rRoutes");
+const authRoutes = require("./auth/authRoutes");
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use("/api/batchs", batchRoutes);
 app.use("/api/up-events", upEventRoutes);
 app.use("/api/notices", noticesRoutes);
 app.use("/api/researchs", researchRoutes);
+app.use("/api/auth", authRoutes);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {
