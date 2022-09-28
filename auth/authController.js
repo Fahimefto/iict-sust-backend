@@ -1,15 +1,26 @@
 const AuthUser = require("../models/user");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-//login without jsonwebtoken
+//login user
 const authLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await AuthUser.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    if (user.password !== password)
-      return res.status(400).json({ message: "Invalid credentials" });
-    res.status(200).json(user);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    } else {
+      const isValid = await bcrypt.compare(password, user.password);
+      if (isValid) {
+        const token = jwt.sign({ id: user._id }, process.env.JWT_MAGIC, {
+          expiresIn: "12h",
+        });
+        res.status(200).json({ message: "Login Success", auth: true, token });
+      } else {
+        res.status(400).json({ message: "Invalid credentials" });
+      }
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -19,14 +30,19 @@ const authLogin = async (req, res) => {
 const authRegister = async (req, res) => {
   const { username, fullname, email, password, phoneNum } = req.body;
   try {
-    const user = await AuthUser.create({
+    if (!username || !fullname || !email || !password || !phoneNum)
+      return res.status(400).json({ message: "Please fill in all fields" });
+    const user = await AuthUser.findOne({ email });
+    if (user) return res.status(400).json({ message: "user already exists" });
+    const hashedPassword = await bcrypt.hash(password, 9);
+    const newUser = await AuthUser.create({
       username,
       fullname,
       email,
-      password,
+      password: hashedPassword,
       phoneNum,
     });
-    res.status(200).json({ message: "User created successfully", user });
+    res.status(200).json(newUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
