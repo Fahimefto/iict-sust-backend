@@ -2,10 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const eventRoutes = require("./events/evRoutes");
-const noticesRoutes = require("./notices/noticesRoutes") ;
+const noticesRoutes = require("./notices/noticesRoutes");
 const staffRoutes = require("./stuffs/sRoutes");
 const batchRoutes = require("./batch/bRoutes");
 const upEventRoutes = require("./upcommingEvents/upRoutes");
+const researchRoutes = require("./research/rRoutes");
 
 const app = express();
 app.use(express.json());
@@ -20,7 +21,8 @@ app.use("/api/events", eventRoutes);
 app.use("/api/staffs", staffRoutes);
 app.use("/api/batchs", batchRoutes);
 app.use("/api/up-events", upEventRoutes);
-app.use("/api/notices" , noticesRoutes);
+app.use("/api/notices", noticesRoutes);
+app.use("/api/researchs", researchRoutes);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {
