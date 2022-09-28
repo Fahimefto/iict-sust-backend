@@ -2,8 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const eventRoutes = require("./events/evRoutes");
-const staffRoutes = require("./stuffs/sRoutes") ;
 const noticesRoutes = require("./notices/noticesRoutes") ;
+const staffRoutes = require("./stuffs/sRoutes");
+const batchRoutes = require("./batch/bRoutes");
+const upEventRoutes = require("./upcommingEvents/upRoutes");
 
 const app = express();
 app.use(express.json());
@@ -13,9 +15,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ message: "Server Running " });
 });
-//APIs
+// API's
 app.use("/api/events", eventRoutes);
-app.use("/api/staffs" , staffRoutes);
+app.use("/api/staffs", staffRoutes);
+app.use("/api/batchs", batchRoutes);
+app.use("/api/up-events", upEventRoutes);
 app.use("/api/notices" , noticesRoutes);
 
 //server & Database listening
