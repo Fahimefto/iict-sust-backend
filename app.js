@@ -6,6 +6,7 @@ const noticesRoutes = require("./notices/noticesRoutes");
 const staffRoutes = require("./stuffs/sRoutes");
 const batchRoutes = require("./batch/bRoutes");
 const upEventRoutes = require("./upcommingEvents/upRoutes");
+const conRoutes = require("./contact/conRoutes")
 const researchRoutes = require("./research/rRoutes");
 const authRoutes = require("./auth/authRoutes");
 const facultyRoutes = require("./faculty/facultyRoutes");
