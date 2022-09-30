@@ -7,6 +7,7 @@ const staffRoutes = require("./stuffs/sRoutes");
 const batchRoutes = require("./batch/bRoutes");
 const upEventRoutes = require("./upcommingEvents/upRoutes");
 const conRoutes = require("./contact/conRoutes")
+const programsRoutes = require("./programs/progRoutes");
 const researchRoutes = require("./research/rRoutes");
 const authRoutes = require("./auth/authRoutes");
 const facultyRoutes = require("./faculty/facultyRoutes");
@@ -26,6 +27,7 @@ app.use("/api/staffs", staffRoutes);
 app.use("/api/batchs", batchRoutes);
 app.use("/api/up-events", upEventRoutes);
 app.use("/api/notices", noticesRoutes);
+app.use("/api/programs", programsRoutes);
 app.use("/api/researchs", researchRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/faculty", facultyRoutes);
