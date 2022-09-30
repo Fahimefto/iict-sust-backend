@@ -9,6 +9,7 @@ const upEventRoutes = require("./upcommingEvents/upRoutes");
 const researchRoutes = require("./research/rRoutes");
 const authRoutes = require("./auth/authRoutes");
 const facultyRoutes = require("./faculty/facultyRoutes");
+const achievementRoutes = require("./achievement/achievementRoutes");
 
 const app = express();
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use("/api/notices", noticesRoutes);
 app.use("/api/researchs", researchRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/faculty", facultyRoutes);
+app.use("/api/achievements", achievementRoutes);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {
