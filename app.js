@@ -13,9 +13,11 @@ const authRoutes = require("./auth/authRoutes");
 const facultyRoutes = require("./faculty/facultyRoutes");
 const achievementRoutes = require("./achievement/achievementRoutes");
 const directorRoutes = require("./history/historyRoutes");
+const testUpload = require("./uploads/uploaderRoute");
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //routes || API
 
@@ -34,6 +36,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/achievements", achievementRoutes);
 app.use("/api/directors", directorRoutes);
+app.use("/api/test", testUpload);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {
