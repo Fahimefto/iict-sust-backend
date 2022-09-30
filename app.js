@@ -6,12 +6,13 @@ const noticesRoutes = require("./notices/noticesRoutes");
 const staffRoutes = require("./stuffs/sRoutes");
 const batchRoutes = require("./batch/bRoutes");
 const upEventRoutes = require("./upcommingEvents/upRoutes");
-const conRoutes = require("./contact/conRoutes")
+const conRoutes = require("./contact/conRoutes");
 const programsRoutes = require("./programs/progRoutes");
 const researchRoutes = require("./research/rRoutes");
 const authRoutes = require("./auth/authRoutes");
 const facultyRoutes = require("./faculty/facultyRoutes");
 const achievementRoutes = require("./achievement/achievementRoutes");
+const directorRoutes = require("./history/historyRoutes");
 
 const app = express();
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use("/api/researchs", researchRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/achievements", achievementRoutes);
+app.use("/api/directors", directorRoutes);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {

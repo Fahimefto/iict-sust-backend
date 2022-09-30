@@ -15,11 +15,11 @@ const getAchievementbyId = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).json({ message: "No event with that id" });
+    return res.status(404).json({ message: "No Achievement with that id" });
   try {
     const data = await Achievement.findById({ _id: id });
     if (!data)
-      return res.status(404).json({ message: "No event with that id" });
+      return res.status(404).json({ message: "No Achievement with that id" });
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -48,7 +48,7 @@ const updateAchievementbyId = async (req, res) => {
   const { id } = req.params;
   const { title, description, date, location, image } = req.body;
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).json({ message: "No event with that id" });
+    return res.status(404).json({ message: "No Achievement with that id" });
   try {
     const data = await Achievement.findByIdAndUpdate(
       { _id: id },
@@ -61,8 +61,8 @@ const updateAchievementbyId = async (req, res) => {
       }
     );
     if (!data)
-      return res.status(404).json({ message: "No event with that id" });
-    res.json({ message: "event updated successfully" });
+      return res.status(404).json({ message: "No Achievement with that id" });
+    res.json({ message: "Achievement updated successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -72,12 +72,12 @@ const updateAchievementbyId = async (req, res) => {
 const deleteAchievementbyId = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).json({ message: "No event with that id" });
+    return res.status(404).json({ message: "No Achievement with that id" });
   try {
     const data = await Achievement.findByIdAndDelete({ _id: id });
     if (!data)
-      return res.status(404).json({ message: "No event with that id" });
-    res.json({ message: "event deleted successfully" });
+      return res.status(404).json({ message: "No Achievement with that id" });
+    res.json({ message: "Achievement deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
