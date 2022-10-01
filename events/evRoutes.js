@@ -2,6 +2,7 @@
 const { Router } = require("express");
 const router = Router();
 const cloudinary = require("../uploads/cloudinary");
+const uploader = require("../uploads/eventUploader");
 
 const path = require("path");
 const Events = require("../models/events");

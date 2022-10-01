@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Events = require("../models/events");
 const cloudinary = require("../uploads/cloudinary");
+const uploader = require("../uploads/eventUploader");
 
 //get all events
 const getAllEvents = async (req, res) => {
@@ -30,25 +31,19 @@ const getEventbyId = async (req, res) => {
 //post event
 const postEvent = async (req, res) => {
   try {
-    if (!req.body) return res.status(400).json({ message: "No data sent" });
-    else {
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "events",
-      });
-      console.log(result);
-      const { title, description, date, location } = req.body;
-      const event = await Events.create({
-        title,
-        description,
-        date,
-        location,
-        imgUrl: result.secure_url,
-        cloudinary_id: result.public_id,
-      });
+    const answer = await uploader.getUploadUrl(req, res);
+    console.log(answer);
 
-      res.json(event);
-      console.log(event);
-    }
+    const { title, description, date, location } = req.body;
+    const event = await Events.create({
+      title,
+      description,
+      date,
+      location,
+      image: answer,
+    });
+
+    res.json(event);
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log(error);

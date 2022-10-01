@@ -18,7 +18,7 @@ const getUploadUrl = async (req, res) => {
         tempDel(tempFilePath);
       }
 
-      res.json(imagebuffer);
+      return imagebuffer;
     } else {
       const { tempFilePath } = files.image;
       const data = await cloudinary.uploader.upload(tempFilePath, {
@@ -27,7 +27,7 @@ const getUploadUrl = async (req, res) => {
       imagebuffer.push(data);
       tempDel(tempFilePath);
 
-      res.json(imagebuffer);
+      return imagebuffer;
     }
   } catch (error) {
     console.log(error.message);
