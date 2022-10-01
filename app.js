@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 const eventRoutes = require("./events/evRoutes");
 const noticesRoutes = require("./notices/noticesRoutes");
@@ -18,6 +19,13 @@ const testUpload = require("./uploads/uploaderRoute");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    safeFileNames: true,
+    tempFileDir: "./tmp/",
+  })
+);
 
 //routes || API
 
@@ -36,7 +44,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/achievements", achievementRoutes);
 app.use("/api/directors", directorRoutes);
-app.use("/api/test", testUpload);
+app.use("/api/upload", testUpload);
 
 //server & Database listening
 app.listen(process.env.PORT, async () => {
