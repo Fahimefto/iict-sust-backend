@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Events = require("../models/events");
 const cloudinary = require("../uploads/cloudinary");
-const upload = require("../uploads/multer");
 
 //get all events
 const getAllEvents = async (req, res) => {

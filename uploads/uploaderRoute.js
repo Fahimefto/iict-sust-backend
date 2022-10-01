@@ -1,20 +1,9 @@
 const { Router } = require("express");
 const router = Router();
 const cloudinary = require("./cloudinary");
+const fs = require("fs");
+const controller = require("./eventUploader");
 
-router.post("/", async (req, res, next) => {
-  const files = req.files.image;
-
-  const imagebuffer = [];
-
-  for (let i = 0; i < files.length; i++) {
-    const { tempFilePath } = files[i];
-    const data = await cloudinary.uploader.upload(tempFilePath, {
-      folder: "multiple",
-    });
-    imagebuffer.push(data);
-  }
-  res.json(imagebuffer);
-});
+router.post("/", controller.getUploadUrl);
 
 module.exports = router;
