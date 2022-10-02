@@ -32,7 +32,6 @@ const getEventbyId = async (req, res) => {
 const postEvent = async (req, res) => {
   try {
     const answer = await uploader.getUploadUrl(req, res);
-    console.log(answer);
 
     const { title, description, date, location } = req.body;
     const event = await Events.create({
@@ -53,10 +52,11 @@ const postEvent = async (req, res) => {
 //update event by id
 const updateEventbyId = async (req, res) => {
   const { id } = req.params;
-  const { title, description, date, location, image } = req.body;
+  const { title, description, date, location } = req.body;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ message: "No event with that id" });
   try {
+    const imgRes = await uploader.getUploadUrl(req, res);
     const event = await Events.findByIdAndUpdate(
       { _id: id },
       {
@@ -64,7 +64,7 @@ const updateEventbyId = async (req, res) => {
         description,
         date,
         location,
-        image,
+        image: imgRes,
       }
     );
     if (!event)
@@ -82,6 +82,7 @@ const deleteEventbyId = async (req, res) => {
     return res.status(404).json({ message: "No event with that id" });
   try {
     const event = await Events.findByIdAndDelete({ _id: id });
+
     if (!event)
       return res.status(404).json({ message: "No event with that id" });
     res.json({ message: "event deleted successfully" });

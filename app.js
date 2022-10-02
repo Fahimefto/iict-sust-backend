@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
-const eventRoutes = require("./events/evRoutes");
+const eventRoutes = require("./events/eventRoutes");
 const noticesRoutes = require("./notices/noticesRoutes");
 const staffRoutes = require("./stuffs/sRoutes");
 const batchRoutes = require("./batch/bRoutes");
@@ -23,7 +23,7 @@ app.use(
   fileUpload({
     useTempFiles: true,
     safeFileNames: true,
-    tempFileDir: "./tmp/",
+    tempFileDir: "/tmp/",
   })
 );
 

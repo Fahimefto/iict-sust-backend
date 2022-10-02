@@ -8,7 +8,7 @@ const path = require("path");
 const Events = require("../models/events");
 
 //event controller
-const eventController = require("./evController");
+const eventController = require("./eventController");
 
 //API routes of events
 router.get("/", eventController.getAllEvents);
