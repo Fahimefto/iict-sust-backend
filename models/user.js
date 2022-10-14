@@ -6,7 +6,12 @@ const authUserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phoneNum: { type: Number, required: true },
-    isAdmin: { type: Boolean, default: false },
+    role: {
+      type: String,
+      enum: ["admin", "teacher", "staff"],
+      required: [true, "Please provide a role"],
+      default: "staff",
+    }
   },
   { timestamps: true }
 );
