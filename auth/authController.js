@@ -27,9 +27,12 @@ const authLogin = async (req, res) => {
                 await RefreshToken.create({
                     token: refreshToken,
                 });
+                res.cookie('refreshToken', refreshToken, {httponly: true});
+                res.cookie('accessToken', accessToken, {httponly: true});
+                
 
                 res.status(200).json({
-                    message: 'Login Success',
+                    message: 'cookie set successfully',
                     auth: true,
                     accessToken,
                     refreshToken,
@@ -111,7 +114,7 @@ const deleteUserByID = async (req, res) => {
 };
 
 const refreshToken = async (req, res) => {
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
         return res.status(401).json({ message: 'No token provided' });
     } else {
@@ -135,6 +138,8 @@ const refreshToken = async (req, res) => {
                     await RefreshToken.replaceOne(validtoken, {
                         token: refToken,
                     });
+                    res.cookie('accessToken', accToken, {httponly: true});
+                    res.cookie('refreshToken', refToken, {httponly: true});
                     res.status(200).json({
                         message: 'Token refreshed',
                         accessToken: accToken,
