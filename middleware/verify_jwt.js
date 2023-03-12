@@ -1,19 +1,16 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
-    
-    if (req.headers.authorization || req.headers.Authorization) {
-        
-        const token = req.headers.authorization;
-        
+    if (req.cookies.accessToken) {
+        const token = req.cookies.accessToken;
+
         console.log(token);
         if (token) {
             jwt.verify(token, process.env.JWT_MAGIC, (err, decoded) => {
                 if (err) {
-                    
                     return res.status(401).json({
-                        status: "Unauthorized",
-                        message: "Invalid token",
+                        status: 'Unauthorized',
+                        message: 'Invalid token',
                     });
                 }
                 req.id = decoded.user_info.id;
@@ -23,7 +20,5 @@ const verifyToken = (req, res, next) => {
         }
     }
 };
-
-
 
 module.exports = verifyToken;

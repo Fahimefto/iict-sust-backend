@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require('cookie-parser');
 const eventRoutes = require("./events/evRoutes");
 const noticesRoutes = require("./notices/noticesRoutes");
 const staffRoutes = require("./stuffs/sRoutes");
@@ -18,6 +19,7 @@ const industryRoutes = require("./industry_collab/industryRoutes");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 //routes || API
 
