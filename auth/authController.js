@@ -27,9 +27,12 @@ const authLogin = async (req, res) => {
                 await RefreshToken.create({
                     token: refreshToken,
                 });
-                res.cookie('refreshToken', refreshToken, {httponly: true});
-                res.cookie('accessToken', accessToken, {httponly: true});
-                
+                res.cookie('refreshToken', refreshToken, {
+                    httponly: true,
+                });
+                res.cookie('accessToken', accessToken, {
+                    httponly: true,
+                });
 
                 res.status(200).json({
                     message: 'cookie set successfully',
@@ -138,8 +141,11 @@ const refreshToken = async (req, res) => {
                     await RefreshToken.replaceOne(validtoken, {
                         token: refToken,
                     });
-                    res.cookie('accessToken', accToken, {httponly: true});
-                    res.cookie('refreshToken', refToken, {httponly: true});
+                    res.cookie('accessToken', accToken, {
+                        expires: new Date(Date.now() + 15000),
+                        httponly: true,
+                    });
+                    res.cookie('refreshToken', refToken, { httponly: true });
                     res.status(200).json({
                         message: 'Token refreshed',
                         accessToken: accToken,
